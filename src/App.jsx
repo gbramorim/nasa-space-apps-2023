@@ -54,7 +54,7 @@ function Mercury() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 2;
     const x = 4 * Math.sin(t);
     const z = 4 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -76,7 +76,7 @@ function Venus() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 1.6;
     const x = 6 * Math.sin(t);
     const z = 6 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -98,7 +98,7 @@ function Earth() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 1;
     const x = 9 * Math.sin(t);
     const z = 9 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -120,7 +120,7 @@ function Mars() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 1.3;
     const x = 12 * Math.sin(t);
     const z = 12 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -142,7 +142,7 @@ function Jupiter() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 1;
     const x = 18 * Math.sin(t);
     const z = 18 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -164,7 +164,7 @@ function Saturn() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 0.7;
     const x = 25 * Math.sin(t);
     const z = 25 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -186,7 +186,7 @@ function Uranus() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 0.5;
     const x = 30 * Math.sin(t);
     const z = 30 * Math.cos(t);
     planetRef.current.position.x = x;
@@ -208,7 +208,7 @@ function Neptune() {
   const planetRef = React.useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.getElapsedTime() * 0.2;
     const x = 35 * Math.sin(t);
     const z = 35 * Math.cos(t);
     planetRef.current.position.x = x;
