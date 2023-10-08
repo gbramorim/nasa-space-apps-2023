@@ -10,7 +10,7 @@ export function Mars() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 1.3;
+    const t = clock.getElapsedTime() * 0.07;
     const x = 12 * Math.sin(t);
     const z = 12 * Math.cos(t);
     planetRef.current.position.x = x;

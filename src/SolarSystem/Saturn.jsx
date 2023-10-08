@@ -24,7 +24,7 @@ export function Saturn() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 0.7;
+    const t = clock.getElapsedTime() * 0.07;
     const x = 25 * Math.sin(t);
     const z = 25 * Math.cos(t);
     planetRef.current.position.x = x;

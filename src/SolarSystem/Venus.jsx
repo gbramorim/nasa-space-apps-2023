@@ -10,7 +10,7 @@ export function Venus() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 1.6;
+    const t = clock.getElapsedTime() * 0.08;
     const x = 6 * Math.sin(t);
     const z = 6 * Math.cos(t);
     planetRef.current.position.x = x;

@@ -10,7 +10,7 @@ export function Neptune() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 0.2;
+    const t = clock.getElapsedTime() * 0.02;
     const x = 35 * Math.sin(t);
     const z = 35 * Math.cos(t);
     planetRef.current.position.x = x;

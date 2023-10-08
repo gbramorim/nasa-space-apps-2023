@@ -10,7 +10,7 @@ export function Uranus() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 0.5;
+    const t = clock.getElapsedTime() * 0.05;
     const x = 30 * Math.sin(t);
     const z = 30 * Math.cos(t);
     planetRef.current.position.x = x;

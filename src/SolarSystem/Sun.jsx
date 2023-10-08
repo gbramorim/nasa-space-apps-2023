@@ -10,7 +10,7 @@ export function Sun() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(() => {
-    planetRef.current.rotation.y += 0.005;
+    planetRef.current.rotation.y += 0.007;
   });
 
   const bind = useGesture({

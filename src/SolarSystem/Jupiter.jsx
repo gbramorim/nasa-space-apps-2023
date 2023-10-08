@@ -10,7 +10,7 @@ export function Jupiter() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 1;
+    const t = clock.getElapsedTime() * 0.05;
     const x = 18 * Math.sin(t);
     const z = 18 * Math.cos(t);
     planetRef.current.position.x = x;

@@ -10,7 +10,7 @@ export function Mercury() {
   const [isHovered, setIsHovered] = React.useState(false);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime() * 2;
+    const t = clock.getElapsedTime() * 0.1;
     const x = 4 * Math.sin(t);
     const z = 4 * Math.cos(t);
     planetRef.current.position.x = x;
