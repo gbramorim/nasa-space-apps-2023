@@ -1,8 +1,19 @@
 import React from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import "./App.css";
+import {
+  EarthTexture,
+  JupiterTexture,
+  MarsTexture,
+  MercuryTexture,
+  NeptuneTexture,
+  SaturnTexture,
+  SunTexture,
+  UranusTexture,
+  VenusTexture,
+} from "./assets";
 
 function Ecliptic({ xRadius = 1, zRadius = 1 }) {
   const points = [];
@@ -42,10 +53,16 @@ export default function App() {
 }
 
 function Sun() {
+  const planetRef = React.useRef();
+
+  useFrame(() => {
+    planetRef.current.rotation.y += 0.005;
+  });
+
   return (
-    <mesh>
+    <mesh ref={planetRef}>
       <sphereGeometry args={[2.5, 32, 32]} />
-      <meshStandardMaterial color="#E1DC59" />
+      <meshStandardMaterial map={useLoader(THREE.TextureLoader, SunTexture)} />
     </mesh>
   );
 }
@@ -59,13 +76,17 @@ function Mercury() {
     const z = 4 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.01;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[0.5, 20, 20]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, MercuryTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={4} zRadius={4} />
     </>
@@ -81,13 +102,17 @@ function Venus() {
     const z = 6 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.005;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[0.7, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, VenusTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={6} zRadius={6} />
     </>
@@ -103,13 +128,17 @@ function Earth() {
     const z = 9 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.017;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[0.8, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, EarthTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={9} zRadius={9} />
     </>
@@ -125,13 +154,17 @@ function Mars() {
     const z = 12 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.008;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[0.8, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, MarsTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={12} zRadius={12} />
     </>
@@ -147,13 +180,17 @@ function Jupiter() {
     const z = 18 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.003;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[2, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, JupiterTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={18} zRadius={18} />
     </>
@@ -169,13 +206,17 @@ function Saturn() {
     const z = 25 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.004;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[1, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, SaturnTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={25} zRadius={25} />
     </>
@@ -191,13 +232,17 @@ function Uranus() {
     const z = 30 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.003;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[1, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, UranusTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={30} zRadius={30} />
     </>
@@ -213,13 +258,17 @@ function Neptune() {
     const z = 35 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
+    const rotationSpeed = 0.003;
+    planetRef.current.rotation.y += rotationSpeed;
   });
 
   return (
     <>
       <mesh ref={planetRef}>
         <sphereGeometry args={[1, 40, 32]} />
-        <meshStandardMaterial color="#78D481" />
+        <meshStandardMaterial
+          map={useLoader(THREE.TextureLoader, NeptuneTexture)}
+        />
       </mesh>
       <Ecliptic xRadius={35} zRadius={35} />
     </>
