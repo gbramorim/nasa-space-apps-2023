@@ -10,6 +10,9 @@ import VenusTexture from "./venus.jpg";
 import SunTexture from "./sun.jpg";
 import Stars from "./stars.jpeg";
 
+import SunVideo from "./video/sunvideo.mp4";
+import MercuryPhoto from "./mercuryphoto.jpg";
+
 export {
   EarthTexture,
   JupiterTexture,
@@ -22,4 +25,6 @@ export {
   VenusTexture,
   SunTexture,
   Stars,
+  SunVideo,
+  MercuryPhoto,
 };

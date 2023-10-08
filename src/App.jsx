@@ -136,6 +136,8 @@ export default function App() {
             mass={modalData.mass}
             gravity={modalData.gravity}
             distance={modalData.distance}
+            touristText={modalData.touristText}
+            touristImage={modalData.touristImage}
             isOpen={isModalOpen}
             onClose={() => setModalOpen(false)}
           />

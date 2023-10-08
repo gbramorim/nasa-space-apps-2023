@@ -68,6 +68,12 @@
   flex-direction: row;
   color: white;
 }
+
+.modal .modal-content img {
+  height: 11rem;
+  margin-left: 5px;
+}
+
 .modal h2 {
   margin-top: 0;
 }
@@ -102,4 +108,12 @@
 
 .animated-button:focus {
   outline: none;
+}
+
+.tourist-video {
+  width: 100%;
+  max-width: 400px; /* Defina o tamanho desejado */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Centralize o vídeo horizontalmente */
 }
