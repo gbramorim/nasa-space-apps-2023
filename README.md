@@ -32,7 +32,7 @@ The Solar System Advisor app is your gateway to exploring the cosmos. Whether yo
 
 ## Tech Stack
 
-Hey, this project was made with fast code. I know that maybe require a refact in some components. Don't judge ;)
+Hey, this project was made with fast code because of the deadline. I know that maybe require a refact in some components. Don't judge ;)
 
 - Frontend:
 
