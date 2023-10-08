@@ -5,18 +5,19 @@ import * as THREE from "three";
 import { useGesture } from "react-use-gesture";
 import { VenusTexture } from "../assets";
 
-export function Venus() {
+export function Venus({ isLooked }) {
   const planetRef = React.useRef();
   const [isHovered, setIsHovered] = React.useState(false);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, camera }) => {
     const t = clock.getElapsedTime() * 0.08;
-    const x = 6 * Math.sin(t);
-    const z = 6 * Math.cos(t);
+    const x = 18 * Math.sin(t);
+    const z = 18 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
     const rotationSpeed = 0.005;
     planetRef.current.rotation.y += rotationSpeed;
+    if (isLooked) camera.lookAt(planetRef.current.position);
   });
 
   const bind = useGesture({

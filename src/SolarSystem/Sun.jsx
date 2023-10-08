@@ -5,12 +5,13 @@ import * as THREE from "three";
 import { useGesture } from "react-use-gesture";
 import { SunTexture } from "../assets";
 
-export function Sun() {
+export function Sun({ isLooked }) {
   const planetRef = React.useRef();
   const [isHovered, setIsHovered] = React.useState(false);
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
     planetRef.current.rotation.y += 0.007;
+    if (isLooked) camera.lookAt(planetRef.current.position);
   });
 
   const bind = useGesture({
@@ -20,7 +21,7 @@ export function Sun() {
 
   return (
     <mesh ref={planetRef} {...bind()}>
-      <sphereGeometry args={[2.5, 32, 32]} />
+      <sphereGeometry args={[10, 32, 32]} />
       <meshStandardMaterial map={useLoader(THREE.TextureLoader, SunTexture)} />
       {isHovered && (
         <Html distanceFactor={15}>

@@ -5,18 +5,19 @@ import * as THREE from "three";
 import { useGesture } from "react-use-gesture";
 import { UranusTexture } from "../assets";
 
-export function Uranus() {
+export function Uranus({ isLooked }) {
   const planetRef = React.useRef();
   const [isHovered, setIsHovered] = React.useState(false);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, camera }) => {
     const t = clock.getElapsedTime() * 0.05;
-    const x = 30 * Math.sin(t);
-    const z = 30 * Math.cos(t);
+    const x = 48 * Math.sin(t);
+    const z = 48 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
     const rotationSpeed = 0.003;
     planetRef.current.rotation.y += rotationSpeed;
+    if (isLooked) camera.lookAt(planetRef.current.position);
   });
 
   const bind = useGesture({

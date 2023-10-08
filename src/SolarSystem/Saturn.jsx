@@ -16,22 +16,23 @@ function SaturnRing({ position }) {
   );
 }
 
-export function Saturn() {
+export function Saturn({ isLooked }) {
   const planetRef = React.useRef();
   const [ringPosition, setRingPosition] = React.useState(
     new THREE.Vector3(0, 0, 0)
   );
   const [isHovered, setIsHovered] = React.useState(false);
 
-  useFrame(({ clock }) => {
+  useFrame(({ clock, camera }) => {
     const t = clock.getElapsedTime() * 0.07;
-    const x = 25 * Math.sin(t);
-    const z = 25 * Math.cos(t);
+    const x = 44 * Math.sin(t);
+    const z = 44 * Math.cos(t);
     planetRef.current.position.x = x;
     planetRef.current.position.z = z;
     setRingPosition(new THREE.Vector3(x, 0, z));
     const rotationSpeed = 0.004;
     planetRef.current.rotation.y += rotationSpeed;
+    if (isLooked) camera.lookAt(planetRef.current.position);
   });
 
   const bind = useGesture({
