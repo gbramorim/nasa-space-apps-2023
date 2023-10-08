@@ -32,6 +32,8 @@ The Solar System Advisor app is your gateway to exploring the cosmos. Whether yo
 
 ## Tech Stack
 
+Hey, this project was made with fast code. I know that maybe require a refact in some components. Don't judge ;)
+
 - Frontend:
 
   - React
