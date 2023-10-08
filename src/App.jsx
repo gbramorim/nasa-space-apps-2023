@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { playAudioLoop } from "./helpers/AudioLoop";
 import {
   Sun,
   Mercury,
@@ -13,9 +14,22 @@ import {
   Neptune,
 } from "./SolarSystem";
 
+import {
+  SunObj,
+  MercuryObj,
+  VenusObj,
+  EarthObj,
+  MarsObj,
+  JupiterObj,
+  SaturnObj,
+  NeptuneObj,
+  UranusObj,
+} from "./constants";
+import Modal from "./Modal/Modal";
+
+import Stars from "./SolarSystem/Stars/Stars";
+
 import "./App.css";
-import { playAudioLoop } from "./helpers/AudioLoop";
-import { useState } from "react";
 
 export default function App() {
   const [observePlanet, setObservePlanet] = useState({
@@ -29,12 +43,37 @@ export default function App() {
     Uranus: false,
     Neptune: false,
   });
+  const [isModalOpen, setModalOpen] = useState(false); // Estado para controlar a abertura do modal
+  const [modalData, setModalData] = useState({
+    title: "",
+    description: "",
+    temperature: "",
+    mass: "",
+    gravity: "",
+    distance: "",
+  });
 
   const handlePlanetClick = (planetName) => {
-    // Configura o planeta correspondente para ser observado
+    const planetData = {
+      Sun: SunObj,
+      Mercury: MercuryObj,
+      Venus: VenusObj,
+      Earth: EarthObj,
+      Mars: MarsObj,
+      Jupiter: JupiterObj,
+      Saturn: SaturnObj,
+      Uranus: UranusObj,
+      Neptune: NeptuneObj,
+    };
+
+    if (planetName in planetData) {
+      setModalOpen(true);
+      setModalData(planetData[planetName]);
+    }
+
     setObservePlanet((prevObservePlanet) => ({
       ...Object.keys(prevObservePlanet).reduce((acc, name) => {
-        acc[name] = name === planetName; // Define como true apenas o planeta clicado
+        acc[name] = name === planetName;
         return acc;
       }, {}),
     }));
@@ -53,32 +92,56 @@ export default function App() {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Solar System Advisor</h1>
-      <button onClick={() => handlePlanetClick("Sun")}>Sun</button>
-      <button onClick={() => handlePlanetClick("Mercury")}>Mercury</button>
-      <button onClick={() => handlePlanetClick("Venus")}>Venus</button>
-      <button onClick={() => handlePlanetClick("Earth")}>Earth</button>
-      <button onClick={() => handlePlanetClick("Mars")}>Mars</button>
-      <button onClick={() => handlePlanetClick("Jupiter")}>Jupiter</button>
-      <button onClick={() => handlePlanetClick("Saturn")}>Saturn</button>
-      <button onClick={() => handlePlanetClick("Uranus")}>Uranus</button>
-      <button onClick={() => handlePlanetClick("Neptune")}>Neptune</button>
-
-      <Canvas camera={{ position: [0, 20, 25], fov: 45 }}>
-        <Sun isLooked={observePlanet.Sun} />
-        <Mercury isLooked={observePlanet.Mercury} />
-        <Venus isLooked={observePlanet.Venus} />
-        <Earth isLooked={observePlanet.Earth} />
-        <Mars isLooked={observePlanet.Mars} />
-        <Jupiter isLooked={observePlanet.Jupiter} />
-        <Saturn isLooked={observePlanet.Saturn} />
-        <Uranus isLooked={observePlanet.Uranus} />
-        <Neptune isLooked={observePlanet.Neptune} />
-        <Lights />
-        <OrbitControls />
-      </Canvas>
-    </div>
+    <>
+      <Stars />
+      <div className="container">
+        <h1 className="container-title">Solar System Advisor</h1>
+        <div className="container-buttons">
+          <button onClick={() => handlePlanetClick("Sun")}>Sun</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Mercury")}>Mercury</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Venus")}>Venus</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Earth")}>Earth</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Mars")}>Mars</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Jupiter")}>Jupiter</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Saturn")}>Saturn</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Uranus")}>Uranus</button>
+          <div className="divider"></div>
+          <button onClick={() => handlePlanetClick("Neptune")}>Neptune</button>
+        </div>
+        <Canvas camera={{ position: [0, 20, 25], fov: 45 }}>
+          <Sun isLooked={observePlanet.Sun} />
+          <Mercury isLooked={observePlanet.Mercury} />
+          <Venus isLooked={observePlanet.Venus} />
+          <Earth isLooked={observePlanet.Earth} />
+          <Mars isLooked={observePlanet.Mars} />
+          <Jupiter isLooked={observePlanet.Jupiter} />
+          <Saturn isLooked={observePlanet.Saturn} />
+          <Uranus isLooked={observePlanet.Uranus} />
+          <Neptune isLooked={observePlanet.Neptune} />
+          <Lights />
+          <OrbitControls />
+        </Canvas>
+        {isModalOpen && (
+          <Modal
+            title={modalData.title}
+            description={modalData.description}
+            temperature={modalData.temperature}
+            mass={modalData.mass}
+            gravity={modalData.gravity}
+            distance={modalData.distance}
+            isOpen={isModalOpen}
+            onClose={() => setModalOpen(false)}
+          />
+        )}
+      </div>
+    </>
   );
 }
 

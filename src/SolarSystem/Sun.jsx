@@ -1,33 +1,34 @@
 import React from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 import * as THREE from "three";
-import { useGesture } from "react-use-gesture";
 import { SunTexture } from "../assets";
 
 export function Sun({ isLooked }) {
   const planetRef = React.useRef();
-  const [isHovered, setIsHovered] = React.useState(false);
+  const lightRef = React.useRef();
 
   useFrame(({ camera }) => {
     planetRef.current.rotation.y += 0.007;
     if (isLooked) camera.lookAt(planetRef.current.position);
   });
 
-  const bind = useGesture({
-    onPointerOver: () => setIsHovered(true),
-    onPointerOut: () => setIsHovered(false),
-  });
-
   return (
-    <mesh ref={planetRef} {...bind()}>
-      <sphereGeometry args={[10, 32, 32]} />
-      <meshStandardMaterial map={useLoader(THREE.TextureLoader, SunTexture)} />
-      {isHovered && (
-        <Html distanceFactor={15}>
-          <div className="annotation">KKK</div>
-        </Html>
-      )}
-    </mesh>
+    <>
+      <mesh ref={planetRef}>
+        <sphereGeometry args={[10, 32, 32]} />
+        <meshStandardMaterial
+          emissive={"#ff0000"}
+          map={useLoader(THREE.TextureLoader, SunTexture)}
+        />
+      </mesh>
+      <pointLight
+        ref={lightRef}
+        position={[0, 0, 0]}
+        color="#ff0000"
+        intensity={1}
+        distance={50}
+        decay={2}
+      />
+    </>
   );
 }
